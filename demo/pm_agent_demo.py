@@ -1,7 +1,9 @@
-"""Main entry point for myAgent.
+"""Demo for the PM (Product Manager) agent."""
 
-Example usage of the PM agent.
-"""
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dotenv import load_dotenv
 
@@ -9,8 +11,7 @@ from agents import create_pm_agent
 
 load_dotenv()
 
-
-def main():
+if __name__ == "__main__":
     agent = create_pm_agent()
 
     result = agent.invoke({
@@ -21,7 +22,3 @@ def main():
     })
 
     print(result["messages"][-1].content)
-
-
-if __name__ == "__main__":
-    main()
