@@ -1,9 +1,13 @@
 import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from deepagents import create_deep_agent
 from dotenv import load_dotenv
-from langchain_core.load import load
 from tavily import TavilyClient
+
+from config import get_model
 
 load_dotenv()
 
@@ -18,6 +22,8 @@ def internet_search(query: str, max_results: int = 5):
 agent = create_deep_agent(
     tools=[internet_search],
     system_prompt="Conduct research and write a polished report.",
+    model=get_model("openai:gpt-4o"),
 )
 
-result = agent.invoke({"messages": [{"role": "user", "content": "你是谁"}]})
+result = agent.invoke({"messages": [{"role": "user", "content": "你是哪个模型？你的版本号是什么？"}]})
+print(result["messages"][-1].content)
