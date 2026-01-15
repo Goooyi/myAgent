@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from tavily import TavilyClient
 
 from config import get_model
+from prompts import load_prompt
 
 load_dotenv()
 
@@ -21,7 +22,7 @@ def internet_search(query: str, max_results: int = 5):
 
 agent = create_deep_agent(
     tools=[internet_search],
-    system_prompt="Conduct research and write a polished report.",
+    system_prompt=load_prompt("research"),
     model=get_model("openai:gpt-4o"),
 )
 
